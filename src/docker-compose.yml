@@ -1,0 +1,9 @@
+services:
+  tasksmdb:
+    image: postgres
+
+  messagebus:
+    image: rabbitmq:management
+
+volumes:
+  postgres_tasksmdb:

@@ -1,4 +1,5 @@
 using Carter;
+using Shared.Exceptions.Handler;
 using Shared.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,7 +28,12 @@ builder.Services.ConfigureHttpJsonOptions(options =>
 builder.Services.AddControllers().AddJsonOptions(opts =>
     opts.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 
+builder.Services.AddExceptionHandler<CustomExceptionHandler>();
+
 var app = builder.Build();
+
+
+app.UseExceptionHandler(option => { });
 
 app.UseTasksServiceModule();
 

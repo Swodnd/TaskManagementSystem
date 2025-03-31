@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Shared.CQRS;
 using Tasks.Service.Data;
+using Tasks.Service.Tasks.Exceptions;
 using Tasks.Service.Tasks.Models;
 
 namespace Tasks.Service.Tasks.Features.UpdateTaskStatus
@@ -17,7 +18,7 @@ namespace Tasks.Service.Tasks.Features.UpdateTaskStatus
 
             if (taskEntity is null)
             {
-                throw new Exception($"Task not found: {command.TaskId}");
+                throw new TaskEntityNotFoundException(command.TaskId);
             }
 
             UpdatewTaskEntityStatus(taskEntity, command.NewStatus);
